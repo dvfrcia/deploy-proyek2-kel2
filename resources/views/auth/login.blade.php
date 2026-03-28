@@ -1,47 +1,93 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('title', 'Masuk')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+<section class="auth-page">
+    <div class="container auth-container">
+
+        {{-- LEFT IMAGE --}}
+        <div class="auth-image">
+            <div class="img-placeholder auth-placeholder">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C65D2E" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+            </div>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        {{-- RIGHT FORM --}}
+        <div class="auth-form-wrap">
+            <span class="badge">Selamat Datang</span>
+            <h1 class="auth-title">Masuk</h1>
+            <p class="auth-desc">Masuk ke akun Anda untuk mengakses dashboard anggota</p>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="auth-card">
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                {{-- SESSION ERROR --}}
+                @if(session('error'))
+                    <div class="alert alert-error">{{ session('error') }}</div>
+                @endif
+
+                {{-- VALIDATION ERRORS --}}
+                @if($errors->any())
+                    <div class="alert alert-error">
+                        @foreach($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('login.post') }}">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input @error('email') is-error @enderror"
+                            placeholder="Nama@gmail.com"
+                            value="{{ old('email') }}"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-password-wrap">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input @error('password') is-error @enderror"
+                                placeholder="Masukan password"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" class="toggle-pw" aria-label="Tampilkan password">
+                                <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-forgot">
+                        <a href="{{ route('password.request') }}">Lupa Password ?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Masuk</button>
+
+                    <p class="form-switch">
+                        Belum Punya Akun?
+                        <a href="{{ route('register') }}">Daftar di sini</a>
+                    </p>
+                </form>
+            </div>
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</section>
+@endsection

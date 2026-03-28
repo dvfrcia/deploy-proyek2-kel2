@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 </head>
 <body>
 
@@ -22,8 +23,16 @@
                 <li><a href="{{ route('digital-archive') }}" class="{{ request()->routeIs('digital-archive') ? 'active' : '' }}">Digital Archive</a></li>
             </ul>
             <div class="navbar-actions">
-                <a href="{{ route('login') }}" class="btn-masuk">Masuk</a>
-                <a href="{{ route('register') }}" class="btn-daftar">Daftar Anggota</a>
+                @auth
+                    <span class="btn-masuk">Halo, {{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}" style="display:inline">
+                        @csrf
+                        <button type="submit" class="btn-daftar" style="border:none;cursor:pointer;">Keluar</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="btn-masuk">Masuk</a>
+                    <a href="{{ route('register') }}" class="btn-daftar">Daftar Anggota</a>
+                @endauth
             </div>
             <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span><span></span><span></span>

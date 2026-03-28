@@ -3,23 +3,57 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // ─── Admin default ───────────────────────────
+        User::updateOrCreate(
+            ['email' => 'admin@sanggarmulya.id'],
+            [
+                'name'     => 'Admin Sanggar',
+                'email'    => 'admin@sanggarmulya.id',
+                'alamat'   => 'Indramayu, Jawa Barat',
+                'password' => Hash::make('admin123'),
+                'role'     => 'admin',
+                'status'   => 'aktif',
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // ─── Contoh anggota ──────────────────────────
+        $anggota = [
+            [
+                'name'    => 'Siti Rahayu',
+                'email'   => 'siti@example.com',
+                'alamat'  => 'Jl. Melati No. 12, Indramayu',
+                'no_hp'   => '081234567890',
+            ],
+            [
+                'name'    => 'Budi Santoso',
+                'email'   => 'budi@example.com',
+                'alamat'  => 'Jl. Mawar No. 5, Cirebon',
+                'no_hp'   => '082345678901',
+            ],
+            [
+                'name'    => 'Dewi Kartika',
+                'email'   => 'dewi@example.com',
+                'alamat'  => 'Jl. Anggrek No. 8, Indramayu',
+                'no_hp'   => '083456789012',
+            ],
+        ];
+
+        foreach ($anggota as $data) {
+            User::updateOrCreate(
+                ['email' => $data['email']],
+                array_merge($data, [
+                    'password' => Hash::make('password123'),
+                    'role'     => 'anggota',
+                    'status'   => 'aktif',
+                ])
+            );
+        }
     }
 }
