@@ -11,17 +11,18 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered(): void
     {
-        $response = $this->get('/daftar');
+        $response = $this->get('/daftar'); 
         $response->assertStatus(200);
     }
 
     public function test_new_users_can_register(): void
     {
-        $response = $this->post('/daftar', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+        $response = $this->post('/daftar', [ // ← pastikan /daftar
+            'name'                  => 'Test User',
+            'email'                 => 'test@example.com',
+            'alamat'                => 'Jl. Test No. 1',
+            'password'              => 'password123',
+            'password_confirmation' => 'password123',
         ]);
 
         $this->assertAuthenticated();
