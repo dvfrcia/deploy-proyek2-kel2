@@ -21,7 +21,7 @@
                 <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a></li>
                 <li><a href="{{ route('profile') }}" class="{{ request()->routeIs('profile') ? 'active' : '' }}">Profile</a></li>
                 <li><a href="{{ route('event') }}" class="{{ request()->routeIs('event') ? 'active' : '' }}">Event</a></li>
-                <li><a href="{{ route('digital-archive') }}" class="{{ request()->routeIs('digital-archive') ? 'active' : '' }}">Digital Archive</a></li>
+                <li><a href="{{ route('digital_archive') }}" class="{{ request()->routeIs('digital_archive') ? 'active' : '' }}">Digital Archive</a></li>
             </ul>
             <div class="navbar-actions">
                 @auth
@@ -47,7 +47,7 @@
             <li><a href="{{ route('home') }}">Beranda</a></li>
             <li><a href="{{ route('profile') }}">Profile</a></li>
             <li><a href="{{ route('event') }}">Event</a></li>
-            <li><a href="{{ route('digital-archive') }}">Digital Archive</a></li>
+            <li><a href="{{ route('digital_archive') }}">Digital Archive</a></li>
             <li><a href="{{ route('login') }}">Masuk</a></li>
             <li><a href="{{ route('register') }}" class="btn-daftar">Daftar Anggota</a></li>
         </ul>
@@ -71,7 +71,7 @@
                     <li><a href="{{ route('profile') }}">Tentang Kami</a></li>
                     <li><a href="{{ route('profile') }}">Profile sanggar</a></li>
                     <li><a href="{{ route('event') }}">Event</a></li>
-                    <li><a href="{{ route('digital-archive') }}">Digital Archive</a></li>
+                    <li><a href="{{ route('digital_archive') }}">Digital Archive</a></li>
                 </ul>
             </div>
             <div class="footer-kontak">

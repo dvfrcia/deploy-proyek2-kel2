@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\{DashboardController, ProfileController,
 Route::get('/',                [HomeController::class,          'index'])->name('home');
 Route::get('/profile',         [FrontProfileController::class,  'index'])->name('profile');
 Route::get('/event',           [FrontEventController::class,    'index'])->name('event');
-Route::get('/digital-archive', [DigitalArchiveController::class,'index'])->name('digital-archive');
+Route::get('/digital_archive', [DigitalArchiveController::class,'index'])->name('digital_archive');
 
 Route::middleware('guest')->group(function () {
     Route::get('/masuk',   [AuthController::class, 'showLogin'])->name('login');

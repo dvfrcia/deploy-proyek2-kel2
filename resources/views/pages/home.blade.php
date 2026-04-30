@@ -107,7 +107,7 @@
             @php $archiveFotos = $galeri->where('seksi','digital_archive')->take(4); @endphp
             @if($archiveFotos->count())
                 @foreach($archiveFotos as $foto)
-                <a href="{{ route('digital-archive') }}" class="archive-card">
+                <a href="{{ route('digital_archive') }}" class="archive-card">
                     <img src="{{ asset('storage/'.$foto->file) }}"
                          alt="{{ $foto->judul ?? 'Arsip Digital' }}"
                          style="width:100%;height:100%;object-fit:cover">
@@ -115,7 +115,7 @@
                 @endforeach
             @else
                 @for($i = 0; $i < 4; $i++)
-                <a href="{{ route('digital-archive') }}" class="archive-card">
+                <a href="{{ route('digital_archive') }}" class="archive-card">
                     <div class="img-placeholder archive-placeholder">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C65D2E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     </div>
